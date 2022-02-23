@@ -1,6 +1,6 @@
 # TGbot
 
-This is a very simple telegram bot meant to easily upload videos from command
+This is a very simple telegram bot meant to easily upload files from command
 line.
 
 ## Installation
