@@ -1,6 +1,8 @@
 use std::env;
+use std::time::Duration;
 use teloxide::prelude2::*;
 use teloxide::types::InputFile;
+use teloxide::net;
 pub mod lib;
 use lib::error::Error;
 use serde::{Deserialize, Serialize};
@@ -24,12 +26,14 @@ async fn run() -> Result<(), Error> {
     log::info!("Starting uploading...");
     let args: Vec<String> = env::args().collect();
 
-    let bot = Bot::new(scrape_config.token);
+    let client = net::default_reqwest_settings().timeout(Duration::from_secs(30)).build().unwrap();
+    let bot = Bot::with_client(scrape_config.token, client);
+
     if args.len() != 3 {
         log::error!("You didn't provide 2 arguments");
-        println!("\nUsage: ./tgbot \"/path/to/video.mp4\" \"caption of the video\"");
+        println!("\nUsage: ./tgbot \"/path/to/file\" \"caption of file\"");
     } else {
-        bot.send_video(scrape_config.chat_id, InputFile::file(&args[1]))
+        bot.send_document(scrape_config.chat_id, InputFile::file(&args[1]))
             .caption(&args[2])
             .send()
             .await?;
@@ -37,4 +41,3 @@ async fn run() -> Result<(), Error> {
     }
     Ok(())
 }
-
