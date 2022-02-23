@@ -5,10 +5,10 @@ line.
 
 ## Installation
 
-Clone the repo:
+Clone the repo:\
 `git clone https://github.com/lnwor/tgbot && cd tgbot`
 
-Install the package:
+Install the package:\
 `cargo install --path .`
 
 Create the configuration file with your token here: `~/.config/tgbot.yml`.
@@ -22,7 +22,7 @@ token: "abcdefghijklmnopqrstuvwxyz123456789"
 ## Usage
 
 After you set up your configuration file, to use the bot you just have to run
-the following command:
+the following command:\
 `tgbot <chat_id> /path/to/file "caption to add to the file"`
 
 ### Limits
